@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth/next";
 
 // Components
 import Login from "./Login";
+import Logged from "./Logged";
 
 export default async function Nav() {
   const session = await getServerSession(authOptions);
@@ -12,12 +13,13 @@ export default async function Nav() {
 
   return (
     <div>
-      <nav className="flex justify-between items-center py-8">
+      <nav className="flex justify-between items-center py-8 ">
         <Link href={"/"} className="font-bold text-lg">
           Dashboard
         </Link>
         <ul className="flex items-center gap-6">
-          <Login />
+          {!session?.user && <Login />}
+          {session?.user && <Logged />}
         </ul>
       </nav>
     </div>
