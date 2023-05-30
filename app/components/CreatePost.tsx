@@ -4,6 +4,8 @@ import { useState } from "react";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+
   return (
     <form>
       <div className="flex flex-col my-4">
@@ -19,7 +21,11 @@ export default function CreatePost() {
         ></textarea>
       </div>
       <div>
-        <button className="text-sm font-semibold text-white bg-teal-600 py-2 px-6 rounded-md">
+        <button
+          className="text-sm font-semibold text-white bg-teal-600 py-2 px-6 rounded-md"
+          type="submit"
+          disabled={isDisabled}
+        >
           Create a post
         </button>
       </div>
