@@ -1,8 +1,15 @@
 // Next
 import Link from "next/link";
+import { authOptions } from "../../pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth/next";
+
+// Components
 import Login from "./Login";
 
 export default async function Nav() {
+  const session = await getServerSession(authOptions);
+  console.log(session);
+
   return (
     <div>
       <nav className="flex justify-between items-center py-8">

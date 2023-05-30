@@ -4,7 +4,6 @@ import GoogleProvider from "next-auth/providers/google";
 
 // prisma
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
 import prisma from "../../../prisma/client";
 
 const adapter = PrismaAdapter(prisma);
@@ -12,6 +11,7 @@ const adapter = PrismaAdapter(prisma);
 export const authOptions = {
   // Add adapters
   adapter: PrismaAdapter(prisma),
+  secret: process.env.AUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
     GithubProvider({
