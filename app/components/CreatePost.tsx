@@ -20,7 +20,12 @@ export default function CreatePost() {
           placeholder="What's on your mind ?"
         ></textarea>
       </div>
-      <div>
+      <div className="flex items-center justify-between gap-2">
+        <p
+          className={`font-bold text-sm ${
+            title.length > 300 ? "text-red-700" : "text-gray-900"
+          }`}
+        >{`${title.length}/300`}</p>
         <button
           className="text-sm font-semibold text-white bg-teal-600 py-2 px-6 rounded-md"
           type="submit"
