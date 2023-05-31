@@ -2,9 +2,15 @@
 // Next
 import { useState } from "react";
 
+// Library
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 export default function CreatePost() {
   const [title, setTitle] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+
+  // Create a post
+  const { mutate } = useMutation();
 
   return (
     <form>
