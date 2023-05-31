@@ -18,6 +18,7 @@ export default async function handler(
     // Check user login or not
     if (!session) return res.status(401).json({ message: "Please sign in 😉" });
     const title: string = req.body.title;
+    console.log(title);
 
     // Get user
     const prismaUser = await prisma.user.findUnique({
@@ -25,11 +26,12 @@ export default async function handler(
     });
 
     // CHeck title
-    if (title.length > 300)
+    if (title.length > 300) {
       return res.status(403).json({ message: "Please write les then 300 🙏" });
-
-    if (title.length)
+    }
+    if (!title.length) {
       return res.status(403).json({ message: "Do not leave this empety 😁" });
+    }
 
     // Create post
     try {
