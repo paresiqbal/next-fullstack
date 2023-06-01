@@ -2,6 +2,9 @@
 
 // Components
 import CreatePost from "./components/CreatePost";
+import Post from "./components/Post";
+
+// Libarary
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
@@ -24,6 +27,15 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center p-10">
       <h1>Hello World</h1>
       <CreatePost />
+      {data.map((post) => (
+        <Post
+          key={post.id}
+          name={post.user.name}
+          avatar={post.user.image}
+          postTitle={post.title}
+          id={post.id}
+        />
+      ))}
     </main>
   );
 }

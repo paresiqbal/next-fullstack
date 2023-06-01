@@ -15,7 +15,7 @@ export default async function handler(
         include: {
           user: true,
         },
-        orderby: {
+        orderBy: {
           createdAt: "desc",
         },
       });
