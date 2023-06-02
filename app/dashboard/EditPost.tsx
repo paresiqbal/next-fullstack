@@ -40,6 +40,7 @@ export default function EditPost({
       </div>
       <div className="flex items-center gap-4 ml-8 my-2">
         <p className="text-sm font-semibold">{comments?.length} Comments</p>
+        <button className="text-sm font-semibold text-red-500">Delete</button>
       </div>
     </div>
   );
