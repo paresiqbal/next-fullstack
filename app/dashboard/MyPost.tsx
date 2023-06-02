@@ -31,7 +31,7 @@ export default function MyPosts() {
           avatar={data.image}
           name={data.name}
           title={post.title}
-          comments={post.comments}
+          comments={post.Comment}
         />
       ))}
     </div>

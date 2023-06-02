@@ -36,7 +36,10 @@ export default function EditPost({
         <h3 className="text-gray-900 text-sm font-semibold">{name}</h3>
       </div>
       <div>
-        <h1 className="ml-8 text-sm">{title}</h1>
+        <h1 className="ml-8 text-sm break-all">{title}</h1>
+      </div>
+      <div className="flex items-center gap-4 ml-8 my-2">
+        <p className="text-sm font-semibold">{comments?.length} Comments</p>
       </div>
     </div>
   );
