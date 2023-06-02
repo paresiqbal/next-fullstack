@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Post({ avatar, name, postTitle, id, Comment }) {
   return (
-    <div className="bg-white my-8 p-8 rounded-lg">
+    <div className="bg-white my-8 p-8 rounded-lg w-full">
       <div className="flex items-center gap-2">
         <Image
           className="rounded-full"

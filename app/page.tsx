@@ -27,7 +27,7 @@ export default function Home() {
   if (isLoading) return "Loading ...";
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-10">
+    <main className="flex min-h-screen flex-col p-2">
       <h1>Hello World</h1>
       <CreatePost />
       {data?.map((post) => (
