@@ -16,7 +16,11 @@ export default async function handler(
     const session = await getServerSession(req, res, authOptions);
 
     // Check user login or not
-    if (!session) return res.status(401).json({ message: "Please sign in 😉" });
+    if (!session) {
+      return res
+        .status(401)
+        .json({ message: "Please signin to post a comment." });
+    }
     const prismaUser = await prisma.user.findUnique({
       where: { email: session?.user?.email },
     });
