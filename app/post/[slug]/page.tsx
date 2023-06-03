@@ -2,7 +2,6 @@
 
 // Components
 import Post from "@/app/components/Post";
-import { PostType } from "@/app/types/Posts";
 
 // Libarry
 import { useQuery } from "@tanstack/react-query";
@@ -18,6 +17,7 @@ const fetchDetails = async (slug: string) => {
   const response = await axios.get(`/api/posts/${slug}`);
   return response.data;
 };
+
 export default function PostDetail(url: URL) {
   const { data, isLoading } = useQuery({
     queryKey: ["detail-post"],
