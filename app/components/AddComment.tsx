@@ -6,74 +6,74 @@ import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-type PostProps = {
-  id?: string;
-};
-
 type Comment = {
   postId?: string;
   title: string;
 };
-
+type PostProps = {
+  id?: string;
+};
 export default function AddComment({ id }: PostProps) {
+  let commentToastId: string;
+  console.log(id);
   const [title, setTitle] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+
   const queryClient = useQueryClient();
-
-  let commentToastID: string;
-
-  // Comments functionality
   const { mutate } = useMutation(
-    async (data: Comment) => axios.post("/api/posts/addComment", { data }),
+    async (data: Comment) => {
+      return axios.post("/api/posts/addComment", { data });
+    },
     {
       onSuccess: (data) => {
+        queryClient.invalidateQueries(["detail-post"]);
         setTitle("");
         setIsDisabled(false);
-        toast.success("Comment added", { id: commentToastID });
+        toast.success("Added your comment", { id: commentToastId });
       },
       onError: (error) => {
+        console.log(error);
         setIsDisabled(false);
         if (error instanceof AxiosError) {
-          toast.error(error?.response?.data.message, { id: commentToastID });
+          toast.error(error?.response?.data.message, { id: commentToastId });
         }
       },
     }
   );
 
-  // Submit Comments
-  const submitComment = async (e: React.FormEvent) => {
+  const submitPost = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsDisabled(true);
-    commentToastID = toast.loading("Adding your comment", {
-      id: commentToastID,
+    commentToastId = toast.loading("Adding your comment", {
+      id: commentToastId,
     });
     mutate({ title, postId: id });
   };
-
   return (
-    <form className="my-8 " onSubmit={submitComment}>
-      <h3>Add a comment</h3>
+    <form onSubmit={submitPost} className="my-8">
+      <h3 className="text-xl">Add a comment</h3>
+
       <div className="flex flex-col my-2">
         <input
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
           type="text"
           name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
           className="p-4 text-lg rounded-md my-2"
         />
       </div>
       <div className="flex items-center gap-2">
         <button
-          className="text-sm bg-teal-500 text-white py-2 px-4 rounded-md"
           disabled={isDisabled}
+          className=" text-sm bg-teal-600 text-white py-2 px-6 rounded-md disabled:opacity-25"
           type="submit"
         >
           Add Comment
         </button>
         <p
-          className={`font-bold ${
-            title.length > 300 ? "text-red-500" : "text-gray-900"
-          }`}
+          className={`font-semibold  ${
+            title.length > 300 ? "text-red-700" : "text-gray-900"
+          } `}
         >{`${title.length}/300`}</p>
       </div>
     </form>
