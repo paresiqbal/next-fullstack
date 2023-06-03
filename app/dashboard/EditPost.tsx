@@ -5,8 +5,9 @@ import Image from "next/image";
 import { useState } from "react";
 
 // Library
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 // Components
 import Toggle from "./Toggle";
@@ -33,21 +34,26 @@ export default function EditPost({
   // Toggle delete
   const [toggle, setToggle] = useState(false);
 
+  let deleteToastId: string;
+  const queryClient = useQueryClient();
+
   // Delete post
   const { mutate } = useMutation(
-    async (id: string) =>
-      await axios.delete("/api/posts/deletePost", { data: id }),
+    async (id: string) => await axios.post("/api/posts/deletePost", { id }),
     {
       onError: (error) => {
-        console.log(error);
+        console.log("error deleting: ", error);
+        toast.error("Error deleting the post");
       },
       onSuccess: (data) => {
-        console.log(data);
+        toast.success("Post deleted", { id: deleteToastId });
+        queryClient.invalidateQueries(["auth-posts"]);
       },
     }
   );
 
   const deletePost = () => {
+    deleteToastId = toast.loading("Deleting your post.", { id: deleteToastId });
     mutate(id);
   };
 
