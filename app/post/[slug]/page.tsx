@@ -39,7 +39,7 @@ export default function PostDetail(url: URL) {
         postTitle={data.title}
         Comment={data.Comment}
       />
-      <AddComment id={data.id} />
+      <AddComment id={data?.id} />
     </div>
   );
 }
