@@ -7,6 +7,8 @@ import { useState } from "react";
 // Library
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+
+// Components
 import Toggle from "./Toggle";
 
 type EditProps = {
@@ -28,12 +30,26 @@ export default function EditPost({
   comments,
   id,
 }: EditProps) {
+  // Toggle delete
   const [toggle, setToggle] = useState(false);
 
+  // Delete post
   const { mutate } = useMutation(
     async (id: string) =>
-      await axios.delete("/api/posts/deletePost", { data: id })
+      await axios.delete("/api/posts/deletePost", { data: id }),
+    {
+      onError: (error) => {
+        console.log(error);
+      },
+      onSuccess: (data) => {
+        console.log(data);
+      },
+    }
   );
+
+  const deletePost = () => {
+    mutate(id);
+  };
 
   return (
     <>
@@ -63,7 +79,7 @@ export default function EditPost({
           </button>
         </div>
       </div>
-      <Toggle />
+      {toggle && <Toggle deletePost={deletePost} setToggle={setToggle} />}
     </>
   );
 }
