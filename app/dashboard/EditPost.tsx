@@ -7,6 +7,7 @@ import { useState } from "react";
 // Library
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import Toggle from "./Toggle";
 
 type EditProps = {
   id: string;
@@ -62,6 +63,7 @@ export default function EditPost({
           </button>
         </div>
       </div>
+      <Toggle />
     </>
   );
 }
