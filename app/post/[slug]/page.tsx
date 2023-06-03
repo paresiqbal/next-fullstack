@@ -2,7 +2,7 @@
 
 // Components
 import Post from "@/app/components/Post";
-import { PostType } from "@/app/types/Post";
+import { PostType } from "@/app/types/Posts";
 
 // Libarry
 import { useQuery } from "@tanstack/react-query";
@@ -29,7 +29,7 @@ export default function PostDetail(url: URL) {
 
   return (
     <div>
-      <h1>Hellow</h1>
+      <Post id={data.id} name={data.user.name} />
     </div>
   );
 }
