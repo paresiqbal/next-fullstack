@@ -1,7 +1,8 @@
 "use client";
 
 // Components
-import { PostType } from "@/app/types/Posts";
+import AddComment from "@/app/components/AddComment";
+import Post from "@/app/components/Post";
 
 // Library
 import { useQuery } from "@tanstack/react-query";
@@ -21,7 +22,7 @@ const fetchDetails = async (slug: string) => {
 };
 
 export default function PostDetail(url: URL) {
-  const { data, isLoading } = useQuery<PostType[]>({
+  const { data, isLoading } = useQuery({
     queryKey: ["detail-post"],
     queryFn: () => fetchDetails(url.params.slug),
   });
@@ -29,5 +30,16 @@ export default function PostDetail(url: URL) {
   if (isLoading) return "Loading ...";
   console.log(data);
 
-  return <div>PostDetail</div>;
+  return (
+    <div>
+      <Post
+        id={data.id}
+        name={data.user.name}
+        avatar={data.user.image}
+        postTitle={data.title}
+        Comment={data.Comment}
+      />
+      <AddComment id={data.id} />
+    </div>
+  );
 }
