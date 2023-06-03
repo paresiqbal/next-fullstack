@@ -3,7 +3,6 @@
 // Library
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { error } from "console";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -52,7 +51,7 @@ export default function AddComment({ id }: PostProps) {
   };
 
   return (
-    <form className="my-8 ">
+    <form className="my-8 " onSubmit={submitComment}>
       <h3>Add a comment</h3>
       <div className="flex flex-col my-2">
         <input
