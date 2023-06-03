@@ -8,9 +8,10 @@ import { useState } from "react";
 import Toggle from "./Toggle";
 
 // Library
-import { useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { error } from "console";
+import { toast } from "react-hot-toast";
+import { data } from "autoprefixer";
 
 type EditProps = {
   id: string;
@@ -33,11 +34,12 @@ export default function EditPost({
 }: EditProps) {
   // Toggle delete
   const [toggle, setToggle] = useState(false);
+  const queryClient = useQueryClient();
+  let deleteToastID: string;
 
   // Delte posts
   const { mutate } = useMutation(
-    async (id: string) =>
-      await axios.delete("/api/posts/deletePost", { data: id }),
+    async (id: string) => await axios("/api/posts/deletePost", { data: id }),
     {
       onError: (error) => {
         console.log(error);
@@ -50,6 +52,9 @@ export default function EditPost({
 
   // Delete function
   const deletePost = () => {
+    deleteToastID = toast.loading("Deleting your post ...", {
+      id: deleteToastID,
+    });
     mutate(id);
   };
 
