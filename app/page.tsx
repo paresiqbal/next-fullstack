@@ -9,7 +9,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 // Types
-import { PostType } from "./types/Post";
+import { PostType } from "./types/Posts";
 
 // Fetch all posts
 const allPosts = async () => {
