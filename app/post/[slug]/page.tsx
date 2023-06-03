@@ -19,7 +19,7 @@ const fetchDetails = async (slug: string) => {
   return response.data;
 };
 export default function PostDetail(url: URL) {
-  const { data, isLoading } = useQuery<PostType[]>({
+  const { data, isLoading } = useQuery({
     queryKey: ["detail-post"],
     queryFn: () => fetchDetails(url.params.slug),
   });
@@ -29,7 +29,13 @@ export default function PostDetail(url: URL) {
 
   return (
     <div>
-      <Post id={data.id} name={data.user.name} />
+      <Post
+        id={data.id}
+        name={data.user.name}
+        avatar={data.user.image}
+        postTitle={data.title}
+        Comment={data.Comment}
+      />
     </div>
   );
 }
