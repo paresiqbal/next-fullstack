@@ -43,9 +43,12 @@ export default function EditPost({
     {
       onError: (error) => {
         console.log(error);
+        toast.error("Error deleting the post", { id: deleteToastID });
       },
       onSuccess: (data) => {
         console.log(data);
+        toast.success("Post has been deleted", { id: deleteToastID });
+        queryClient.invalidateQueries(["auth-posts"]);
       },
     }
   );
@@ -66,7 +69,7 @@ export default function EditPost({
             width={32}
             height={32}
             src={avatar}
-            alt="avarat"
+            alt="avatar"
             className="w-6 rounded-full"
           />
           <h3 className="text-gray-900 text-sm font-semibold">{name}</h3>
