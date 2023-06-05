@@ -12,7 +12,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "POST") {
+  if (req.method === "DELETE") {
     const session = await getServerSession(req, res, authOptions);
 
     // Check user login or not
@@ -21,7 +21,8 @@ export default async function handler(
 
     // Delete a post
     try {
-      const postId = req.body;
+      const postId = req.query.id;
+
       const result = await prisma.post.delete({
         where: {
           id: postId,
@@ -29,7 +30,9 @@ export default async function handler(
       });
       res.status(200).json(result);
     } catch (err) {
-      res.status(403).json({ err: "Error has occured when deleting a post" });
+      res
+        .status(500)
+        .json({ err: "Error has occured when deleting a post", debug: err });
     }
   }
 }
