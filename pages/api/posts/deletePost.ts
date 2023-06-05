@@ -16,10 +16,12 @@ export default async function handler(
     const session = await getServerSession(req, res, authOptions);
 
     // Check user login or not
+
     if (!session) return res.status(401).json({ message: "Please sign in 😉" });
-    const postId = req.body.id;
+
     // Delete a post
     try {
+      const postId = req.body;
       const result = await prisma.post.delete({
         where: {
           id: postId,

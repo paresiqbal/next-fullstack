@@ -39,7 +39,8 @@ export default function EditPost({
 
   // Delete post
   const { mutate } = useMutation(
-    async (id: string) => await axios.post("/api/posts/deletePost", { id }),
+    async (id: string) =>
+      await axios.post("/api/posts/deletePost", { data: id }),
     {
       onError: (error) => {
         console.log("error deleting: ", error);

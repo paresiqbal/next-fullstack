@@ -28,7 +28,7 @@ export default async function handler(
     try {
       const { title, postId } = req.body.data;
 
-      if (!title.lenght) {
+      if (!title.length) {
         return res.status(401).json({ message: "Please enter something" });
       }
 
