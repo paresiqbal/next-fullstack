@@ -52,7 +52,6 @@ export default function AddComment({ id }: PostProps) {
   return (
     <form onSubmit={submitPost} className="my-8">
       <h3 className="text-xl">Add a comment</h3>
-
       <div className="flex flex-col my-2">
         <input
           onChange={(e) => setTitle(e.target.value)}
