@@ -42,7 +42,7 @@ export default function PostDetail(url: URL) {
       />
       <AddComment id={data?.id} />
       {data?.Comment?.map((comment) => (
-        <div key={comment.id} className="bg-white my-6 text-sm p-2 rounded-md">
+        <div key={comment.id} className="bg-white my-6 text-sm p-4 rounded-md">
           <div className="flex items-center gap-2">
             <Image
               width={32}
@@ -50,9 +50,10 @@ export default function PostDetail(url: URL) {
               src={comment.user?.image}
               alt="avatar"
             />
-            <h3>{comment?.user?.name}</h3>
+            <h3 className="font-semibold">{comment?.user?.name}</h3>
+            <h2 className="text-sm">{comment.createdAt}</h2>
           </div>
-          <p>{comment.user?.title}</p>
+          <div className="py-2 ml-10">{comment.message}</div>
         </div>
       ))}
     </div>
