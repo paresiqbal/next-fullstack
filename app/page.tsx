@@ -28,7 +28,6 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col p-2">
-      <h1>Hello World</h1>
       <CreatePost />
       {data?.map((post) => (
         <Post
