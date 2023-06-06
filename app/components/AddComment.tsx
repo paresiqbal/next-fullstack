@@ -10,9 +10,11 @@ type Comment = {
   postId?: string;
   title: string;
 };
+
 type PostProps = {
   id?: string;
 };
+
 export default function AddComment({ id }: PostProps) {
   let commentToastId: string;
   console.log(id);

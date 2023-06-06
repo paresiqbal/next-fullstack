@@ -52,6 +52,7 @@ export default function PostDetail(url: URL) {
             />
             <h3>{comment?.user?.name}</h3>
           </div>
+          <p>{comment.user?.title}</p>
         </div>
       ))}
     </div>
