@@ -4,7 +4,21 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Post({ avatar, name, postTitle, id, Comment }) {
+type PostProps = {
+  avatar: string;
+  name: string;
+  postTitle: string;
+  id: string;
+  Comment: string;
+};
+
+export default function Post({
+  avatar,
+  name,
+  postTitle,
+  id,
+  Comment,
+}: PostProps) {
   return (
     <div className="bg-white my-8 p-8 rounded-lg w-full">
       <div className="flex items-center gap-2">
